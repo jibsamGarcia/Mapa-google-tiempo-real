@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AIC PLATAFORMA DE VIDEO</title>
+    <meta charset="utf-8">
+    <style>
+       #map {
+        height: 500px;
+        width: 100%;
+       }
+    </style>
+    <link rel="shortcut icon" type="image/ico" href="static/icons/favicon.ico"/>
+    <link href="static/css/MaterializeIcons.css" rel="stylesheet">
+    <link href="static/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script type="text/javascript" src="static/js/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript" src="static/js/materialize.min.js"></script>
+    <script type="text/javascript" src="static/script.js"></script>
+  </head>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.fixed-action-btn');
+    var instances = M.FloatingActionButton.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.fixed-action-btn').floatingActionButton();
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.materialboxed');
+    var instances = M.Materialbox.init(elems, options);
+  });
+
+  // Or with jQuery
+
+  $(document).ready(function(){
+    $('.materialboxed').materialbox();
+  });
+  </script>
+  <script>
+      function initMap() {
+
+        // A couple of places
+        //var brunchPos = {lat: 21.128454, lng: -101.650117};
+        //var faboritPos = {lat: 21.128454, lng: -101.650117};
+        var brunchPos = {lat: 21.128454, lng: -101.650117};
+        var faboritPos = {lat: 21.128454, lng: -101.650117};
+        var brunchPos1 = {lat: 21.128334, lng: -101.650171};
+        var faboritPos1 = {lat: 21.128334, lng: -101.650171};
+        var brunchPos2 = {lat: 21.128298, lng: -101.649977};
+        var faboritPos2 = {lat: 21.128298, lng: -101.649977};
+        var brunchPos3 = {lat: 21.128318, lng: -101.650250};
+        var faboritPos3 = {lat: 21.128318, lng: -101.650250};
+        var image = "https://img.icons8.com/officel/40/000000/fighter-jet.png"; 
+        var markerLabel = {text: "piloto1", color: "#FFFFFF",fontWeight: "bold", fontSize: "25px"};
+        var markerLabel1 = {text:'piloto2', color: "#FFFFFF",fontWeight: "bold", fontSize: "25px"};
+        var markerLabel2 = {text:'piloto3', color: "#FFFFFF",fontWeight: "bold", fontSize: "25px"};
+        var markerLabel3 = {text:'piloto4', color: "#FFFFFF",fontWeight: "bold", fontSize: "25px"};
+
+
+        // Create map, draw it in the targetElem and sets the cameraPosition
+        var targetElem = document.getElementById('map');
+        var cameraPosition = { mapId: "1521d0163ebe7acd", zoom: 6, center: faboritPos, faboritPos1, faboritPos2, faboritPos3 };
+
+        var map = new google.maps.Map(targetElem, cameraPosition);
+
+        // We have already displayed the map, let's add markers
+
+        // Create markers in the map
+        marker1 = new google.maps.Marker({ map: map, icon: image, label: markerLabel, position: faboritPos });
+        marker2 = new google.maps.Marker({ map: map, icon: image, position: brunchPos });
+
+        marker3 = new google.maps.Marker({ map: map, icon: image, label: markerLabel1, position: faboritPos1 });
+        marker4 = new google.maps.Marker({ map: map, icon: image, position: brunchPos1 });
+
+        marker5 = new google.maps.Marker({ map: map, icon: image, label: markerLabel2, position: faboritPos2 });
+        marker6 = new google.maps.Marker({ map: map, icon: image, position: brunchPos2 });
+
+        marker7 = new google.maps.Marker({ map: map, icon: image, label: markerLabel3, position: faboritPos3 });
+        marker8 = new google.maps.Marker({ map: map, icon: image, position: brunchPos3 });
+
+        // Now let's setup the autocomplete input, with which we can add more markers
+
+        // Autocomplete input
+        var input = document.getElementById('searchTextField');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+        // Listen to autocomplete input
+        autocomplete.addListener('place_changed', function() {
+
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            // User entered the name of a place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert("No details available for input: '" + place.name + "'. Select one of the results.");
+            return;
+          }
+
+          // Add marker in map
+          var marker = new google.maps.Marker({ map: map, position: place.geometry.location });
+        });
+
+      }
+    </script>
+
+    <!-- Loads maps library (with places library) and then calls initMap() -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initMap&key=AIzaSyDIGQdxZwvhT4WcMxSs8i8WfGpu7pjNowA&map_ids=1521d0163ebe7acd">
+    </script>
+  <body>
+    <header class="intro-header" style="background-image: url('static/images/fondoprin.jpg')">
+    <a name="subir"></a>
+      <nav>
+      <div class="nav-wrapper #1a237e indigo darken-4">
+      <img width="70" height="63" src="{{ url_for('static', filename='images/logo.png') }}">
+      <a href="{{ url_for('home') }}" class="brand-logo">&nbsp; GOOGLE-MAPS</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">☰</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="{{ url_for('home') }}">Actualizar</a></li>
+      </ul>
+    </div>
+  </nav>
+  </div>
+ </div>
+</div>
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="{{ url_for('home') }}">Actualizar</a></li>
+  </ul>
+
+    <div class="row">
+      <div class="col s2">
+    </div>
+      <div class="col s6">
+        <nav>
+          <div class="nav-wrapper #1a237e indigo darken-4">
+            <img class="left" width="70" height="63" src="{{ url_for('static', filename='images/logo.png') }}">
+            <p><a href="#!" class="brand-logo"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; MAPA GOOGLE API</a><img class="right" width="70" height="63" src="{{ url_for('static', filename='images/logo.png') }}">
+        </nav
+        <br>
+        <br>
+        <ul class="tabs tabs-fixed-width tab-demo z-depth-1 #1a237e indigo darken-4">
+          <li class="tab col s3"><a class="active" href="#test1"<span class="blue-text text-darken-1">Cam1</a></li>
+          <li class="tab col s3"><a href="#test2"<span class="blue-text text-darken-1">Cam2</a></li>
+          <li class="tab col s3"><a href="#test3"<span class="blue-text text-darken-1">Cam3</a></li>
+          <li class="tab col s3"><a href="#test4"<span class="blue-text text-darken-1">Cam4</a></li>
+          <li class="tab col s3"><a href="#test5"<span class="blue-text text-darken-1">Cam5</a></li>
+          <li class="tab col s3"><a href="#test6"<span class="blue-text text-darken-1">Cam6</a></li>
+          <li class="tab col s3"><a href="#test7"<span class="blue-text text-darken-1">Cam7</a></li>
+          <li class="tab col s3"><a href="#test8"<span class="blue-text text-darken-1">Cam8</a></li>
+          <li class="tab col s3"><a href="#test9"<span class="blue-text text-darken-1">Cam9</a></li>
+          <li class="tab col s3"><a href="#test10"<span class="blue-text text-darken-1">Cam10</a></li>
+          <li class="tab col s3"><a href="#test11"<span class="blue-text text-darken-1">Cam11</a></li>
+          <li class="tab col s3"><a href="#test12"<span class="blue-text text-darken-1">Cam12</a></li>
+          <li class="tab col s3"><a href="#test13"<span class="blue-text text-darken-1">Cam13</a></li>
+          <li class="tab col s3"><a href="#test14"<span class="blue-text text-darken-1">Cam14</a></li>
+          <li class="tab col s3"><a href="#test15"<span class="blue-text text-darken-1">Cam15</a></li>
+          <li class="tab col s3"><a href="#test16"<span class="blue-text text-darken-1">Cam16</a></li>
+          <li class="tab col s3"><a href="#test17"<span class="blue-text text-darken-1">Cam17</a></li>
+          <li class="tab col s3"><a href="#test18"<span class="blue-text text-darken-1">Cam18</a></li>
+          <li class="tab col s3"><a href="#test19"<span class="blue-text text-darken-1">Cam19</a></li>
+          <li class="tab col s3"><a href="#test20"<span class="blue-text text-darken-1">Cam20</a></li>
+        </ul>
+        <center><div id="test1" class="col s6"><img class="materialboxed" width="720" id="bg" src="{{ url_for('video_feed') }}">
+        </div>
+        </center>
+        <center><div id="test2" class="col s6"><img class="materialboxed" width="720" id="bg1" src="{{ url_for('video_feed2') }}">
+        </div></center>
+        <center><div id="test3" class="col s6"><img class="materialboxed" width="720" id="bg2" src="http://0.0.0.0:8080/video_feed">
+        </div></center>
+        <center><div id="test4" class="col s6"><img class="materialboxed" width="720" id="bg" src="{{ url_for('video_feed2') }}">
+        </div></center>
+        <center><div id="test5" class="col s6"><img class="materialboxed" width="720" id="bg1" src="{{ url_for('video_feed') }}">
+        </div></center>
+        <center><div id="test6" class="col s6"><img class="materialboxed" width="720" id="bg2" src="{{ url_for('video_feed2') }}">
+        </div></center>
+        <center><div id="test7" class="col s6"><img class="materialboxed" width="720" id="bg" src="{{ url_for('video_feed') }}">
+        </div></center>
+        <center><div id="test8" class="col s6"><img class="materialboxed" width="720" id="bg1" src="{{ url_for('video_feed') }}">
+        </div></center>
+        <center><div id="test9" class="col s6"><img class="materialboxed" width="720" id="bg2" src="{{ url_for('video_feed') }}">
+        </div></center>
+        <center><div id="test10" class="col s6"><img class="materialboxed" width="720" id="bg" src="{{ url_for('video_feed2') }}">
+        </div></center>
+        <center><div id="test11" class="col s6"><img class="materialboxed" width="720" id="bg1" src="{{ url_for('video_feed') }}">
+        </div></center>
+        <center><div id="test12" class="col s6"><img class="materialboxed" width="720" id="bg2" src="{{ url_for('video_feed') }}">
+        </div></center>
+        <center><div id="test13" class="col s6"><img class="materialboxed" width="720" id="bg" src="{{ url_for('video_feed') }}">
+        </div></center>
+        <center><div id="test14" class="col s6"><img class="materialboxed" width="720" id="bg1" src="{{ url_for('video_feed2') }}">
+        </div></center>
+        <center><div id="test15" class="col s6"><img class="materialboxed" width="720" id="bg2" src="{{ url_for('video_feed') }}">
+        </div></center>
+        <center><div id="test16" class="col s6"><img class="materialboxed" width="720" id="bg" src="{{ url_for('video_feed') }}">
+        </div></center>
+        <center><div id="test17" class="col s6"><img class="materialboxed" width="720" id="bg1" src="{{ url_for('video_feed') }}">
+        </div></center>
+        <center><div id="test18" class="col s6"><img class="materialboxed" width="720" id="bg2" src="{{ url_for('video_feed2') }}">
+        </div></center>
+        <center><div id="test19" class="col s6"><img class="materialboxed" width="720" id="bg2" src="{{ url_for('video_feed') }}">
+        </div></center>
+        <center><div id="test20" class="col s6"><img class="materialboxed" width="720" id="bg2" src="{{ url_for('video_feed') }}">
+        </div></center>
+        <br>
+        <div id="map"></div>
+      </div>
+    <div  class="col s4">
+        <div style="text-align:center;padding:1em 0;"><a style="text-decoration:none;" href="https://www.zeitverschiebung.net/es/city/4005270"><span style="color:gray;"></span>Guanajuato, México</a><iframe src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=es&size=small&timezone=America%2FMexico_City" width="100%" height="90" frameborder="0" seamless></iframe> </div>
+
+        <div id="feedback-bg-info">
+        <table>
+        <thead>
+          <tr>
+              <th><font color="white">Nombre</font></th>
+              <th><font color="white">Caida</font></th>
+              <th><center><font color="white">Ubicación</font></center></th>
+              <th><font color="white">Latidos</font></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><font color="white">Elías0</font><br><img src="{{ url_for('static', filename='images/faceyo.jpg') }}" width="100" height="100"></img></td>
+            <td><font color="white">{{ fall }}</font></td>
+            <td><center><font color="white">lat:{{ lat }},&nbsp; lon:{{ lon }}</font></center></td>
+            <td><center><font color="white">{{ lpm }}</font></center></td>
+          </tr>
+          <tr>
+            <td><font color="white">Elìas1</font><br><img src="{{ url_for('static', filename='images/faceyo.jpg') }}" width="100" height="100"></img></td>
+            <td><font color="white">{{ fall }}</font></td>
+            <td><center><font color="white">lat:{{ lat }},&nbsp; lon:{{ lon }}</font></center></td>            
+            <td><center><font color="white">{{ lpm }}</font></center></td>
+          </tr>
+          <tr>
+            <td><font color="white">Elías2</font><br><img src="{{ url_for('static', filename='images/faceyo.jpg') }}" width="100" height="100"></img><</td>
+            <td><font color="white">{{ fall }}</font></td>
+            <td><center><font color="white">lat:{{ lat }},&nbsp; lon:{{ lon }}</font></center></td>
+            <td><center><font color="white">{{ lpm }}</font></center></td>
+          </tr>
+          <tr>
+            <td><font color="white">Elías3</font><br><img src="{{ url_for('static', filename='images/faceyo.jpg') }}" width="100" height="100"></img></td>
+            <td><font color="white">{{ fall }}</font></td>
+            <td><center><font color="white">lat:{{ lat }},&nbsp; lon:{{ lon }}</font></center></td>
+            <td><center><font color="white">{{ lpm }}</font></center></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+    <script src="http://cdnjs.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded",function(){
+      const variableName = document.querySelector('.tabs');
+              M.Tabs.init(variableName,{
+                      swipeable:true,
+                        duration:300
+                        });
+                      })
+    </script>
+    <script>
+  $(document).ready(function() {
+       var refreshId =  setInterval( async() => {
+      $('#feedback-bg-info').load("{{ url_for('sensores') }}");//actualizas el div
+      var stringLocations = await fetch("http://0.0.0.0:8000/locations");
+      var jsonLocations = await stringLocations.json();
+      var locations = jsonLocations["locations"]
+      var position = new google.maps.LatLng(locations[0].latitude, locations[0].longitude) 
+      marker1.setPosition(position)
+      marker2.setPosition(position)
+      var position = new google.maps.LatLng(locations[0].latitude, locations[0].longitude) 
+      marker3.setPosition(position)
+      marker4.setPosition(position)
+    }, 2000 );
+  });
+
+</script>
+  </body>
+</html>

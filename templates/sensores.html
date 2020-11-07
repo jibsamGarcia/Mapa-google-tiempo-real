@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <header class="intro-header" style="background-image: url('static/images/fondoprin.jpg')"></header>
+
+        <table>
+        <thead>
+          <tr>
+              <th><font color="white">Nombre</font></th>
+              <th><font color="white">Caida</font></th>
+              <th><center><font color="white">Ubicación</font></center></th>
+              <th><font color="white">Latidos</font></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td><font color="white">Elías0</font><br><img src="{{ url_for('static', filename='images/faceyo.jpg') }}" width="100" height="100"></img></td>
+            <td><font color="white">{{ fall }}</font></td>
+            <td><center><font color="white">lat:{{ lat }},&nbsp; lon:{{ lon }}</font></center></td>
+            <td><center><font color="white">{{ lpm }}</font></center></td>
+          </tr>
+          <tr>
+            <td><font color="white">Elías1</font><br><img src="{{ url_for('static', filename='images/faceyo.jpg') }}" width="100" height="100"></img></td>
+            <td><font color="white">{{ fall }}</font></td>
+            <td><center><font color="white">lat:{{ lat }},&nbsp; lon:{{ lon }}</font></center></td>            
+            <td><center><font color="white">{{ lpm }}</font></center></td>
+          </tr>
+          <tr>
+            <td><font color="white">Elías2</font><br><img src="{{ url_for('static', filename='images/faceyo.jpg') }}" width="100" height="100"></img><</td>
+            <td><font color="white">{{ fall }}</font></td>
+            <td><center><font color="white">lat:{{ lat }},&nbsp; lon:{{ lon }}</font></div></center></td>
+            <td><center><font color="white">{{ lpm }}</font></center></td>
+          </tr>
+          <tr>
+            <td><font color="white">Elías3</font><br><img src="{{ url_for('static', filename='images/faceyo.jpg') }}" width="100" height="100"></img></td>
+            <td><font color="white">{{ fall }}</font></td>
+            <td><center><font color="white">lat:{{ lat }},&nbsp; lon:{{ lon }}</font></div></center></td>
+            <td><center><font color="white">{{ lpm }}</font></center></td>
+          </tr>
+        </tbody>
+      </table>
+  </body>
+</html>
