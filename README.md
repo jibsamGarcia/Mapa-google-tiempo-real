@@ -13,4 +13,4 @@ Tienes que instalar flask Framework End OpenCV para Python3
 - Conecte la cámara usb al dispositivo o el puerto 0 de su camara web.
 - Ejecute python3 start.py
 - Abrir en el navegador localhost:8000. Para otros dispositivos, cambie la IP...
-![Screenshot](cp.png)
+![Screenshot](cap.png)
